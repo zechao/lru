@@ -11,6 +11,12 @@ type Cacher[K comparable, V any] interface {
 	Delete(key K)
 }
 
+// LRUCache is a generic implementation of a Least Recently Used (LRU) cache.
+// It stores key-value pairs up to a specified capacity. When the cache exceeds
+// its capacity, the least recently used item is evicted. The cache provides
+// O(1) access and update operations by combining a map for fast lookups and a
+// doubly linked list to track usage order. The structure is safe for concurrent
+// use with an embedded mutex.
 type LRUCache[K comparable, V any] struct {
 	capacity int
 	// cache is a map that holds the key and a pointer to the list element
